@@ -1,0 +1,89 @@
+<h3 *ngIf="isAddMode">Add User</h3>
+<h3 *ngIf="!isAddMode">Edit User</h3>
+<div class="col-10 ml-2" style="margin-left: 50px;">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="form-row">
+            <div class="form-group col-5">
+                <label>User Id</label>
+                <input type="text" formControlName="UserId" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.UserId.errors }" />
+                <div *ngIf="submitted && f.UserId.errors" class="invalid-feedback">
+                    <div *ngIf="f.UserId.errors.required">UserId is required</div>
+                </div>
+            </div>
+            <div class="col-7"></div>
+            <div class="form-group col-5">
+                <label>First Name</label>
+                <input type="text" formControlName="FirstName" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.FirstName.errors }" />
+                <div *ngIf="submitted && f.FirstName.errors" class="invalid-feedback">
+                    <div *ngIf="f.FirstName.errors.required">First Name is required</div>
+                </div>
+            </div>
+            <div class="col-7"></div>
+            <div class="form-group col-5">
+                <label>Last Name</label>
+                <input type="text" formControlName="LastName" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.LastName.errors }" />
+                <div *ngIf="submitted && f.LastName.errors" class="invalid-feedback">
+                    <div *ngIf="f.LastName.errors.required">Last Name is required</div>
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-5">
+                <label>Email</label>
+                <input type="text" formControlName="Email" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.Email.errors }" />
+                <div *ngIf="submitted && f.Email.errors" class="invalid-feedback">
+                    <div *ngIf="f.Email.errors.required">Email is required</div>
+                    <div *ngIf="f.Email.errors.Email">Email must be a valid email address</div>
+                </div>
+            </div>
+            <div class="col-7"></div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-5">
+                <label>Password</label>
+                <input type="password" formControlName="PCode" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.PCode.errors }" />
+                <div *ngIf="submitted && f.PCode.errors" class="invalid-feedback">
+                    <div *ngIf="f.PCode.errors.required">Password is required</div>
+                    <div *ngIf="f.PCode.errors.minlength">Password must be at least 6 characters</div>
+                </div>
+            </div>
+            <div class="col-7"></div>
+            <div class="form-group col-5">
+                <label>Confirm Password</label>
+                <input type="password" formControlName="confirmPassword" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }" />
+                <div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
+                    <div *ngIf="f.confirmPassword.errors.required">Confirm Password is required</div>
+                    <div *ngIf="f.confirmPassword.errors.mustMatch">Passwords must match</div>
+                </div>
+            </div>
+            <div class="col-7"></div>
+            <div class=" col-5">
+
+
+                <form [formGroup]="form">
+                    <label>Active Status </label>&nbsp;
+                    <input type="radio" value="true" formControlName="IsActive" checked>
+                    <span> Yes</span> &nbsp;
+                    <input type="radio" value="false" formControlName="IsActive">
+                    <span> No</span>
+
+                </form>
+            </div>
+        </div>
+        <div class="form-group">
+            <button [disabled]="loading" class="btn btn-primary">
+                <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                Save
+            </button>
+            <a routerLink="/users" class="btn btn-link">Cancel</a>
+        </div>
+        <input type="hidden" formControlName="UserAction" Value="A">
+    </form>
+</div>
